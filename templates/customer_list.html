@@ -1,0 +1,58 @@
+{% extends "homepage.html" %}
+{% block body_block %}
+<div class = "container"><br>
+  <a class='btn btn-primary ' href="{% url 'car_sales_app:customer_create'%}">Add new customer</a>
+  <div class="text-center">
+
+    <h2>Customer list</h2>
+  </div>
+    <div class="table-responsive">
+          <table class="table">
+            <thead>
+                <tr>
+                  <th scope="col">Customer id</th>
+                  <th scope="col">Customer gender</th>
+                  <th scope="col">Customer region</th>
+                  <th scope="col">Customer marital status</th>
+                  <th scope="col">Customer income group </th>
+                </tr>
+            </thead>
+            <tbody>
+              {% for customer in customer_list %}
+              <tr>
+                <td><a href="{% url 'car_sales_app:customer_detail' pk=customer.pk %}">{{customer.customer_id}}</a></td>
+                <td>{{customer.customer_gender}}</td>
+                <td>{{customer.customer_region}}</td>
+                <td>{{customer.customer_marital_status |yesno:"Married,Single"}}</td>
+                <td>{{customer.customer_income_group}}</td>
+
+
+              </tr>
+              {% endfor %}
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+<div class="container">
+        {% if is_paginated %}
+
+            <div class='pagination'>
+              <div class="text-xs-center">
+                <span class="page-links">
+                    {% if page_obj.has_previous %}
+                        <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">previous</a>
+                    {% endif %}
+                    <span class="page-current">
+                        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                    </span>
+                    {% if page_obj.has_next %}
+                        <a href="{{ request.path }}?page={{ page_obj.next_page_number }}">next</a>
+                    {% endif %}
+                </span>
+            </div>
+            </div>
+        {% endif %}
+
+</div>
+  {% endblock %}

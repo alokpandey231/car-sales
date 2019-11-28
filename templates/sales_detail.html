@@ -1,0 +1,44 @@
+{% extends "homepage.html" %}
+{% block body_block %}
+  <div class="container">
+    <div class="text-center">
+      <h2>Sales Details:</h2>
+    </div>
+    <div class="table-responsive">
+      <table class="table">
+        <tr>
+          <th>Sales id:</th><td>{{sales_details.sales_id}}</td>
+        </tr><tr>
+          <th>Purchased date: </th><td>{{sales_details.purchased_date}}</td>
+        </tr><tr>
+          <th>Customer Id:</th><td>{{sales_details.customer}}</td>
+        </tr><tr>
+          <th>Fuel:</th><td>{{sales_details.fuel}}</td>
+        </tr><tr>
+          <th>Vehicle segment:</th><td>{{sales_details.vehicle_segment}}</td>
+        </tr><tr>
+          <th>Selling price: </th><td>{{sales_details.selling_price}}</td>
+        </tr><tr>
+          <th>Power steering: </th><td>{{sales_details.power_steering |yesno }}</td>
+        </tr><tr>
+          <th>Airbags: </th><td>{{sales_details.airbags |yesno }}</td>
+        </tr><tr>
+          <th>Sunroof:</th><td>{{sales_details.sunroof |yesno }}</td>
+        </tr><tr>
+          <th>Matt finish:</th><td>{{sales_details.matt_finish |yesno }}</td>
+        </tr><tr>
+          <th>Music system: </th><td>{{sales_details.music_system |yesno }}</td>
+        </tr>
+      </table>
+
+  </div>
+
+  </div>
+  <div class="container">
+    <a class='btn btn-dark' href="{% url 'car_sales_app:sales_update' pk=sales_details.pk %}">Update</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+    <a class='btn btn-danger' href="{% url 'car_sales_app:sales_delete' pk=sales_details.pk %}">Delete</a>
+
+
+  </div>
+
+{% endblock %}

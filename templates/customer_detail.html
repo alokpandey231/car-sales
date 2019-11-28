@@ -1,0 +1,72 @@
+{% extends "homepage.html" %}
+{% block body_block %}
+  <div class="container">
+    <div class="text-center">
+      <h2>Customer Details:</h2>
+    </div>
+    <div class="table-responsive">
+      <table class="table">
+        <tr>
+          <th>Customer id: </th><td>{{customer_details.customer_id}}</td>
+        </tr><tr>
+          <th>Gender:</th><td>{{customer_details.customer_gender}}</td>
+        </tr><tr>
+          <th>Region:</th><td>{{customer_details.customer_region}}</td>
+        </tr><tr>
+          <th>Marital status:</th><td>{{customer_details.customer_marital_status |yesno:"Married,Single"}} </td>
+        </tr><tr>
+          <th>Customer income group:</th><td> {{customer_details.customer_income_group }}</td>
+        </tr>
+      </table>
+
+
+  </div>
+
+  </div>
+  <div class="container">
+    <a class='btn btn-dark' href="{% url 'car_sales_app:customer_update' pk=customer_details.pk %}">Update</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+    <a class='btn btn-danger' href="{% url 'car_sales_app:customer_delete' pk=customer_details.pk %}">Delete</a>
+<br><br>
+<div class="text-center">
+      <h2>Customer sale Details:</h2>
+</div>
+  </div>
+  <div class="table-responsive">
+        <table class="table">
+          <thead>
+              <tr>
+                <th scope="col">Sales id</th>
+                <th scope="col">Fuel</th>
+                <th scope="col">Vehicle segment</th>
+                <th scope="col">Selling price</th>
+                <th scope="col">Purchased date</th>
+                <th scope="col">Customer</th>
+                <th scope="col">Power steering</th>
+                <th scope="col">Airbags</th>
+                <th scope="col">Sunroof</th>
+                <th scope="col">Matt finish</th>
+                <th scope="col">Music system</th>
+              </tr>
+          </thead>
+          <tbody>
+            {% for sales in customer_details.sale.all %}
+            <tr>
+              <td><a href="{% url 'car_sales_app:sales_detail' pk=sales.pk %}">{{sales.sales_id}}</a></td>
+              <td>{{sales.fuel}}</td>
+              <td>{{sales.vehicle_segment}}</td>
+              <td>{{sales.selling_price}}</td>
+              <td>{{sales.purchased_date}}</td>
+              <td><a href="{% url 'car_sales_app:customer_detail' pk=sales.customer.pk %}">{{sales.customer}}</a></td>
+              <td>{{sales.power_steering |yesno }}</td>
+              <td>{{sales.airbags |yesno }}</td>
+              <td>{{sales.sunroof |yesno }}</td>
+              <td>{{sales.matt_finish |yesno }}</td>
+              <td>{{sales.music_system |yesno }}</td>
+
+            </tr>
+            {% endfor %}
+
+          </tbody>
+        </table>
+      </div>
+{% endblock %}

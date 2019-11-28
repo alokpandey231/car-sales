@@ -1,0 +1,13 @@
+<style>
+.tdStyle
+{
+background-image:url({% static "homepage.jpeg" %})
+background-repeat:no-repeat;
+background-size:100%;
+-moz-background-size: 100%; /* Gecko 1.9.2 (Firefox 3.6) */
+-o-background-size: 100%; /* Opera 9.5 */
+-webkit-background-size: 100%; /* Safari 3.0 */
+-khtml-background-size: 100%; /* Konqueror 3.5.4 */
+-moz-border-image: url(mtn.jpg) 0; /* Gecko 1.9.1 (Firefox 3.5) */
+}
+</style>

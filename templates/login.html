@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+{% extends "homepage.html" %}
+{% block body_block %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+<body id="bg" style="background-image: url({% static 'hello.jpeg' %});no-repeat center center fixed;-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;">
+  {% if messages %}
+                  {% for message in messages %}
+                  <div class="alert alert-danger text-center">
+                <strong>{{message}}</strong>
+                  </div>
+
+                  {% endfor %}
+              {% endif %}
+<br>
+<div class="text-center">
+  <h3>Log In</h3>
+</div>
+<div class="container">
+    <form method="POST" novalidate >
+      {% csrf_token %}
+      {% if form.errors %}
+
+      {% endif %}
+
+      <div class="row justify-content-center">
+        <div class="col-4 ">
+          {{ form.username|as_crispy_field }}
+
+        </div>
+      </div>
+
+      <div class="row justify-content-center" >
+        <div class="col-4">
+          {{ form.password|as_crispy_field }}
+        </div>
+      </div>
+
+      <div class=" row justify-content-center" >
+        <input type="submit" class='btn btn-primary' value="Submit">
+      </div>
+    </form>
+    <br>
+    <div class="text-center">
+      <h2><strong>New User register here </strong></h2>
+    </div>
+    <div class=" row justify-content-center" >
+      <a href="{% url "car_sales_app:user_register" %}" class="btn btn-warning" role="button" id = "ids">register here</a>
+    </div>
+</div>
+</body>
+{% endblock %}

@@ -1,0 +1,69 @@
+{% extends "homepage.html" %}
+{% block body_block %}
+<div class="conrainer"><br>
+    <a class='btn btn-primary ' href="{% url 'car_sales_app:sales_create'%}">Add new sales data</a>
+    <div class="text-center">
+      <h2>Sales list</h2>
+    </div>
+    <div class="table-responsive">
+          <table class="table">
+            <thead>
+                <tr>
+                  <th scope="col">Sales id</th>
+                  <th scope="col">Fuel</th>
+                  <th scope="col">Vehicle segment</th>
+                  <th scope="col">Selling price</th>
+                  <th scope="col">Purchased date</th>
+                  <th scope="col">Customer</th>
+                  <th scope="col">Power steering</th>
+                  <th scope="col">Airbags</th>
+                  <th scope="col">Sunroof</th>
+                  <th scope="col">Matt finish</th>
+                  <th scope="col">Music system</th>
+                  <th scope="col">Customer Region</th>
+                </tr>
+            </thead>
+            <tbody>
+              {% for sales in sales_list %}
+              <tr>
+                <td><a href="{% url 'car_sales_app:sales_detail' pk=sales.pk %}">{{sales.sales_id}}</a></td>
+                <td>{{sales.fuel}}</td>
+                <td>{{sales.vehicle_segment}}</td>
+                <td>{{sales.selling_price}}</td>
+                <td>{{sales.purchased_date}}</td>
+                <td><a href="{% url 'car_sales_app:customer_detail' pk=sales.customer.pk %}">{{sales.customer}}</a></td>
+                <td>{{sales.power_steering |yesno }}</td>
+                <td>{{sales.airbags |yesno }}</td>
+                <td>{{sales.sunroof |yesno }}</td>
+                <td>{{sales.matt_finish |yesno }}</td>
+                <td>{{sales.music_system |yesno }}</td>
+                <td>{{sales.customer.customer_region}}</td>
+
+              </tr>
+              {% endfor %}
+
+            </tbody>
+          </table>
+        </div>
+
+</div>
+
+<div class="conrainer">
+  {% if is_paginated %}
+        <div class="pagination">
+            <span class="page-links">
+                {% if page_obj.has_previous %}
+                    <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">previous</a>
+                {% endif %}
+                <span class="page-current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                </span>
+                {% if page_obj.has_next %}
+                    <a href="{{ request.path }}?page={{ page_obj.next_page_number }}">next</a>
+                {% endif %}
+            </span>
+        </div>
+    {% endif %}
+
+</div>
+{% endblock %}

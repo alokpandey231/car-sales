@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+{% extends "homepage.html" %}
+{% block body_block %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+<body id="bg" style="background-image: url({% static 'hello.jpeg' %});no-repeat center center fixed;-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;">
+
+  <div class="container">
+      <div class="text-center">
+        {% if registered %}
+          <br><br>
+          <h2>Thank you for registering!</h2>
+          <div class="text-center">
+            <h2><strong>Please log in </strong></h2>
+          </div>
+          <div class=" row justify-content-center" >
+            <a href="{% url "car_sales_app:user_login" %}" class="btn btn-primary" role="button" id = "ids">Log In</a>
+          </div>
+         {% else %}
+         <h2>Register Here</h1>
+      </div>
+
+        <form method="POST">
+          {% csrf_token %}
+          <div class="row justify-content-center">
+            <div class="col-4">
+              {{ user_form.username|as_crispy_field }}
+            </div>
+          </div>
+
+          <div class="row justify-content-center">
+            <div class="col-4">
+              {{ user_form.email|as_crispy_field }}
+            </div>
+          </div>
+
+          <div class="row justify-content-center">
+            <div class="col-4">
+              {{ user_form.password|as_crispy_field }}
+            </div>
+          </div >
+          <div class="text-center">
+            <input class = "btn btn-primary " type="submit" name="" value="Register">
+          </div>
+
+        </form>
+
+      {% endif %}
+
+    </div>
+</body>
+{% endblock %}
